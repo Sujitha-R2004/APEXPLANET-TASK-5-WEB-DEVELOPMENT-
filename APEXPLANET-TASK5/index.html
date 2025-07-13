@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/0815a88854.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("alMkL9zvY6wWBkr8m"); // ✅ Updated Public Key
+    })();
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header">
+    <div class="container">
+      <nav>
+        <ul id="sidemenu">
+          <li><a href="#header">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <i class="fas fa-times" onclick="closemenu()"></i>
+        </ul>
+        <i class="fas fa-bars" onclick="openmenu()"></i>
+      </nav>
+      <div class="header-text">
+        <p>Full Stack Developer & UI / UX Designer</p>
+        <h1>HELLO EVERYONE! <br> I'm SUJITHA R <br>(<span> SMVEC</span>, 2026 )</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div id="about">
+    <div class="container">
+      <div class="row">
+        <div class="about-col-1">
+        </div>
+        <div class="about-col-2">
+          <h1 class="sub-title">About me</h1>
+          <p>Hi!<br> I'm SUJITHA R.I'm an undergraduate student at SRI MANAKULA VINAYAGAR ENGINEERING COLLEGE, majoring in Electronics and Communication Engineering. I have a strong passion for full stack web development, UI/UX design, and I am skilled in creating engaging and user-friendly websites. Additionally, I have a keen interest in problem-solving.</p>
+
+          <div class="tab-titles">
+            <p class="tab-links" onmouseover="opentab('education', this)">Education</p>
+            <p class="tab-links" onmouseover="opentab('skills', this)">Skills</p>
+            <p class="tab-links" onmouseover="opentab('experience', this)">Experience</p>
+          </div>
+
+          <div class="tab-contents active-tab" id="education">
+            <ul>
+              <li><span>2022-2026</span><br>B.Tech, Electronics and Communication Engineering; SMVEC; CGPA: 8.01</li>
+              <li><span>2020-2021</span><br>Intermediate (XII), CBSE, Sri Sankara Vidyalaya; 86.60%</li>
+              <li><span>2018-2019</span><br>Matriculation (X), CBSE, Sri Sankara Vidyalaya; 89.17%</li>
+            </ul>
+          </div>
+
+          <div class="tab-contents" id="skills">
+            <ul>
+              <li><span>Programming:</span><br>Python, C, Java, HTML, CSS, JavaScript</li>
+              <li><span>Tools:</span><br>VS Code, Git, GitHub</li>
+              <li><span>Database/Cloud:</span><br>MongoDB</li>
+            </ul>
+          </div>
+
+          <div class="tab-contents" id="experience">
+            <ul>
+              <li><span>ApexPlanet Software Pvt. Ltd. (Jun'25 - Current)</span><br>Front-End Developer Intern</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="contact-left">
+          <h1 class="sub-title">Contact Me</h1>
+          <p><i class="fas fa-envelope"></i> sujithasvo30@gmail.com</p>
+          <div class="social-icons">
+            <a href="https://github.com/Sujitha-R2004"><i class="fab fa-github-square"></i></a>
+            <a href="https://www.linkedin.com/in/sujitha-r-176752333"><i class="fab fa-linkedin"></i></a>
+          </div>
+          <a href="e:\SUJITHA R resume.pdf" download class="btn btn2">Resume</a>
+        </div>
+        <div class="contact-right">
+          <!-- ✅ Updated form names -->
+          <form name="submit-to-google-sheet">
+            <input type="text" name="from_name" placeholder="Your Name Please" required>
+            <input type="email" name="email" placeholder="Your Email Please" required>
+            <textarea name="message" rows="6" placeholder="Your Message....." required></textarea>
+            <button type="submit" class="btn btn2">Share</button>
+          </form>
+          <span id="msg"></span>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>Designed and Developed by SUJITHA R</p>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const tablinks = document.getElementsByClassName("tab-links");
+    const tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname, element) {
+      for (let tablink of tablinks) {
+        tablink.classList.remove("active-link");
+      }
+      for (let tabcontent of tabcontents) {
+        tabcontent.classList.remove("active-tab");
+      }
+      element.classList.add("active-link");
+      document.getElementById(tabname).classList.add("active-tab");
+    }
+  </script>
+
+  <script>
+    const sidemenu = document.getElementById("sidemenu");
+    function openmenu() {
+      sidemenu.style.right = "0";
+    }
+    function closemenu() {
+      sidemenu.style.right = "-500px";
+    }
+  </script>
+
+  <!-- ✅ Updated EmailJS Script -->
+  <script>
+    const form = document.forms['submit-to-google-sheet'];
+    const msg = document.getElementById("msg");
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Sending...";
+
+      emailjs.sendForm('service_krtf8nt', 'template_nsxwhta', form)
+        .then(function () {
+          alert("✅ Email Sent Successfully!");
+          form.reset();
+        }, function (error) {
+          msg.innerHTML = "❌ Oops! Something went wrong.";
+          console.error('FAILED...', error);
+        })
+        .finally(() => {
+          let cooldown = 10;
+          msg.innerHTML = `Please wait ${cooldown}s before submitting again.`;
+          const interval = setInterval(() => {
+            cooldown--;
+            if (cooldown > 0) {
+              msg.innerHTML = `Please wait ${cooldown}s before submitting again.`;
+            } else {
+              clearInterval(interval);
+              msg.innerHTML = "";
+              submitBtn.disabled = false;
+              submitBtn.innerText = "Share";
+            }
+          }, 1000);
+        });
+    });
+  </script>
+</body>
+</html>
